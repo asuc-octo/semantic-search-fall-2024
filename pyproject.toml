@@ -6,9 +6,12 @@ authors = ["Matthew Rowland <contact@mathhulk.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = "^3.12"
 flask = "^3.0.3"
 black = "^24.10.0"
+pinecone = "^5.3.1"
+transformers = "^4.45.2"
+torch = "^2.4.1"
 
 
 [build-system]
