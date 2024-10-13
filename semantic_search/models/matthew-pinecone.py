@@ -2,12 +2,13 @@ from pinecone import Pinecone
 from transformers import AutoTokenizer, AutoModel
 import torch
 
+# TODO: Replace the "..." with the Pinecone API key
 pc = Pinecone(api_key="...")
 
 index = pc.Index("test")
 
 
-def getCourses(query, topK):
+def getCourses(query: str, topK: int):
     # Load the tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained("Xenova/all-MiniLM-L6-v2")
     model = AutoModel.from_pretrained("Xenova/all-MiniLM-L6-v2")
@@ -25,7 +26,12 @@ def getCourses(query, topK):
     # Perform the query on the Pinecone index
     results = index.query(embeddings, top_k=topK, include_values=False)
 
-    # Extract the topK results
-    courses = [result["id"] for result in results["matches"]]
+    # TODO: Extract the topK results
+    courses = [
+        {
+            "subject": "COMPSCI",
+            "number": "61B",
+        }
+    ]
 
     return courses
