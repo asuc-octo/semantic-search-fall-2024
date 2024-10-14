@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import importlib
 import os
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -57,5 +58,9 @@ def get_items():
     return jsonify(results)
 
 
-if __name__ == "__main__":
+def dev():
     app.run(debug=True)
+
+
+def prod():
+    serve(app, listen="*:8080")

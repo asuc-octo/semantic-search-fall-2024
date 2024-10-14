@@ -12,7 +12,11 @@ black = "^24.10.0"
 pinecone = "^5.3.1"
 sentence-transformers = "^3.2.0"
 python-dotenv = "^1.0.1"
+waitress = "^3.0.0"
 
+[tool.poetry.scripts]
+dev = "semantic_search:dev"
+prod = "semantic_search:prod"
 
 [build-system]
 requires = ["poetry-core"]
