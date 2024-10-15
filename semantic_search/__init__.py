@@ -2,8 +2,10 @@ from flask import Flask, jsonify, request
 import importlib
 import os
 from waitress import serve
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 loaded_models = {
     # "model_name": model
@@ -59,7 +61,7 @@ def get_items():
 
 
 def dev():
-    app.run(debug=True)
+    app.run(port=8000, debug=True)
 
 
 def prod():
