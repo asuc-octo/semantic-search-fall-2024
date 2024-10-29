@@ -36,9 +36,7 @@ function App() {
       {/* Main Content */}
       <div className={styles["main-content"]}>
         {/* Query Display */}
-        <div className={styles["query-display"]}>
-          SAMPLE QUERY
-        </div>
+        <div className={styles["query-display"]}>SAMPLE QUERY</div>
 
         {/* Results */}
         <div className={styles["model-results"]}>
@@ -46,33 +44,72 @@ function App() {
             <h3>Results from Model A</h3>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>Structure and Interpretation of Computer Programs</p>
-              <p>An introduction to programming and computer science focused on abstraction techniques as means to manage program complexity. Techniques include procedural abstraction; control abstraction using recursion, higher-order functions, generators, and streams; data...</p>
+              <p className={styles["course-title"]}>
+                Structure and Interpretation of Computer Programs
+              </p>
+              <p>
+                An introduction to programming and computer science focused on
+                abstraction techniques as means to manage program complexity.
+                Techniques include procedural abstraction; control abstraction
+                using recursion, higher-order functions, generators, and
+                streams; data...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61B</p>
               <p className={styles["course-title"]}>Data Structures</p>
-              <p>Fundamental dynamic data structures, including linear lists, queues, trees, and other linked structures; arrays strings, and hash tables. Storage management. Elementary principles of software engineering. Abstract data types...</p>
+              <p>
+                Fundamental dynamic data structures, including linear lists,
+                queues, trees, and other linked structures; arrays strings, and
+                hash tables. Storage management. Elementary principles of
+                software engineering. Abstract data types...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>Structure and Interpretation of Computer Programs</p>
-              <p>An introduction to programming and computer science focused on abstraction techniques as means to manage program complexity. Techniques include procedural abstraction; control abstraction using recursion, higher-order functions, generators, and streams; data...</p>
+              <p className={styles["course-title"]}>
+                Structure and Interpretation of Computer Programs
+              </p>
+              <p>
+                An introduction to programming and computer science focused on
+                abstraction techniques as means to manage program complexity.
+                Techniques include procedural abstraction; control abstraction
+                using recursion, higher-order functions, generators, and
+                streams; data...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61B</p>
               <p className={styles["course-title"]}>Data Structures</p>
-              <p>Fundamental dynamic data structures, including linear lists, queues, trees, and other linked structures; arrays strings, and hash tables. Storage management. Elementary principles of software engineering. Abstract data types...</p>
+              <p>
+                Fundamental dynamic data structures, including linear lists,
+                queues, trees, and other linked structures; arrays strings, and
+                hash tables. Storage management. Elementary principles of
+                software engineering. Abstract data types...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>Structure and Interpretation of Computer Programs</p>
-              <p>An introduction to programming and computer science focused on abstraction techniques as means to manage program complexity. Techniques include procedural abstraction; control abstraction using recursion, higher-order functions, generators, and streams; data...</p>
+              <p className={styles["course-title"]}>
+                Structure and Interpretation of Computer Programs
+              </p>
+              <p>
+                An introduction to programming and computer science focused on
+                abstraction techniques as means to manage program complexity.
+                Techniques include procedural abstraction; control abstraction
+                using recursion, higher-order functions, generators, and
+                streams; data...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61B</p>
               <p className={styles["course-title"]}>Data Structures</p>
-              <p>Fundamental dynamic data structures, including linear lists, queues, trees, and other linked structures; arrays strings, and hash tables. Storage management. Elementary principles of software engineering. Abstract data types...</p>
+              <p>
+                Fundamental dynamic data structures, including linear lists,
+                queues, trees, and other linked structures; arrays strings, and
+                hash tables. Storage management. Elementary principles of
+                software engineering. Abstract data types...
+              </p>
             </div>
             {/* Add more course results as needed */}
           </div>
@@ -81,33 +118,72 @@ function App() {
             <h3>Results from Model B</h3>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>Structure and Interpretation of Computer Programs</p>
-              <p>An introduction to programming and computer science focused on abstraction techniques as means to manage program complexity. Techniques include procedural abstraction; control abstraction using recursion, higher-order functions, generators, and streams; data...</p>
+              <p className={styles["course-title"]}>
+                Structure and Interpretation of Computer Programs
+              </p>
+              <p>
+                An introduction to programming and computer science focused on
+                abstraction techniques as means to manage program complexity.
+                Techniques include procedural abstraction; control abstraction
+                using recursion, higher-order functions, generators, and
+                streams; data...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61B</p>
               <p className={styles["course-title"]}>Data Structures</p>
-              <p>Fundamental dynamic data structures, including linear lists, queues, trees, and other linked structures; arrays strings, and hash tables. Storage management. Elementary principles of software engineering. Abstract data types...</p>
+              <p>
+                Fundamental dynamic data structures, including linear lists,
+                queues, trees, and other linked structures; arrays strings, and
+                hash tables. Storage management. Elementary principles of
+                software engineering. Abstract data types...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>Structure and Interpretation of Computer Programs</p>
-              <p>An introduction to programming and computer science focused on abstraction techniques as means to manage program complexity. Techniques include procedural abstraction; control abstraction using recursion, higher-order functions, generators, and streams; data...</p>
+              <p className={styles["course-title"]}>
+                Structure and Interpretation of Computer Programs
+              </p>
+              <p>
+                An introduction to programming and computer science focused on
+                abstraction techniques as means to manage program complexity.
+                Techniques include procedural abstraction; control abstraction
+                using recursion, higher-order functions, generators, and
+                streams; data...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61B</p>
               <p className={styles["course-title"]}>Data Structures</p>
-              <p>Fundamental dynamic data structures, including linear lists, queues, trees, and other linked structures; arrays strings, and hash tables. Storage management. Elementary principles of software engineering. Abstract data types...</p>
+              <p>
+                Fundamental dynamic data structures, including linear lists,
+                queues, trees, and other linked structures; arrays strings, and
+                hash tables. Storage management. Elementary principles of
+                software engineering. Abstract data types...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>Structure and Interpretation of Computer Programs</p>
-              <p>An introduction to programming and computer science focused on abstraction techniques as means to manage program complexity. Techniques include procedural abstraction; control abstraction using recursion, higher-order functions, generators, and streams; data...</p>
+              <p className={styles["course-title"]}>
+                Structure and Interpretation of Computer Programs
+              </p>
+              <p>
+                An introduction to programming and computer science focused on
+                abstraction techniques as means to manage program complexity.
+                Techniques include procedural abstraction; control abstraction
+                using recursion, higher-order functions, generators, and
+                streams; data...
+              </p>
             </div>
             <div className={styles["course-result"]}>
               <p className={styles["course-number"]}>COMPSCI 61B</p>
               <p className={styles["course-title"]}>Data Structures</p>
-              <p>Fundamental dynamic data structures, including linear lists, queues, trees, and other linked structures; arrays strings, and hash tables. Storage management. Elementary principles of software engineering. Abstract data types...</p>
+              <p>
+                Fundamental dynamic data structures, including linear lists,
+                queues, trees, and other linked structures; arrays strings, and
+                hash tables. Storage management. Elementary principles of
+                software engineering. Abstract data types...
+              </p>
             </div>
             {/* Add more course results as needed */}
           </div>
@@ -116,25 +192,33 @@ function App() {
         {/* Model comparison buttons */}
         <div className={styles["model-comparison"]}>
           <button
-            className={`${styles["comparison-btn"]} ${selectedButton === "modelA" ? styles["selected"] : ""}`}
+            className={`${styles["comparison-btn"]} ${
+              selectedButton === "modelA" ? styles["selected"] : ""
+            }`}
             onClick={() => handleButtonClick("modelA")}
           >
             👉 Model A is better
           </button>
           <button
-            className={`${styles["comparison-btn"]} ${selectedButton === "modelB" ? styles["selected"] : ""}`}
+            className={`${styles["comparison-btn"]} ${
+              selectedButton === "modelB" ? styles["selected"] : ""
+            }`}
             onClick={() => handleButtonClick("modelB")}
           >
             👉 Model B is better
           </button>
           <button
-            className={`${styles["comparison-btn"]} ${selectedButton === "tie" ? styles["selected"] : ""}`}
+            className={`${styles["comparison-btn"]} ${
+              selectedButton === "tie" ? styles["selected"] : ""
+            }`}
             onClick={() => handleButtonClick("tie")}
           >
             🤝 Tie
           </button>
           <button
-            className={`${styles["comparison-btn"]} ${selectedButton === "bothBad" ? styles["selected"] : ""}`}
+            className={`${styles["comparison-btn"]} ${
+              selectedButton === "bothBad" ? styles["selected"] : ""
+            }`}
             onClick={() => handleButtonClick("bothBad")}
           >
             🛑 Both are bad
