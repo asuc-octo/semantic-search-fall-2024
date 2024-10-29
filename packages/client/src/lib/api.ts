@@ -25,7 +25,7 @@ export interface Outcome {
 
 export interface Sample {
   query: string;
-  models: Result[];
+  results: Result[];
 }
 
 export type Choice = 1 | 2 | 0 | -1;

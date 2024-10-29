@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "query": "What are the best courses for learning Python?",
+    "model1": "glove",
+    "model2": "atharv-model",
+    "choice": 1
+  },
+  {
+    "query": "us history",
+    "model1": "atharv-model",
+    "model2": "glove",
+    "choice": 1
+  }
+]

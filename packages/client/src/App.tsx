@@ -25,9 +25,9 @@ function App() {
 
     return {
       ...sample,
-      models: sample.models.map((model) => ({
-        ...model,
-        courses: model.courses.reduce((acc, match) => {
+      models: sample.results.map((result) => ({
+        ...result,
+        courses: result.courses.reduce((acc, match) => {
           const course = courses.find(
             (course) =>
               course.subject === match.subject && course.number === match.number
@@ -75,8 +75,8 @@ function App() {
     try {
       await getOutcome(
         sample.query,
-        sample.models[0].model,
-        sample.models[1].model,
+        sample.results[0].model,
+        sample.results[1].model,
         choice
       );
 
@@ -118,7 +118,10 @@ function App() {
             <div className={styles["model-column"]} key={result.model}>
               <h3>Results from Model {index === 0 ? "A" : "B"}</h3>
               {result.courses.map((course) => (
-                <div className={styles["course-result"]}>
+                <div
+                  className={styles["course-result"]}
+                  key={`${course.subject} ${course.number}`}
+                >
                   <p className={styles["course-number"]}>
                     {course.subject} {course.number}
                   </p>
