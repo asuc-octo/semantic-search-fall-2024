@@ -1,8 +1,47 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./App.module.scss";
+import { useQuery } from "@apollo/client";
+import {
+  Choice,
+  Course,
+  CoursesResponse,
+  GET_COURSES,
+  getOutcome,
+  getSample,
+  Sample,
+} from "@/lib/api";
 
 function App() {
-  const [recentSearches, setRecentSearches] = useState([
+  const [choice, setChoice] = useState<Choice | null>(null);
+  const [sample, setSample] = useState<Sample | null>(null);
+  const [, setLoading] = useState(true);
+
+  const { data } = useQuery<CoursesResponse>(GET_COURSES);
+
+  const courses = useMemo(() => data?.courseList, [data]);
+
+  const parsedSample = useMemo(() => {
+    if (!sample || !courses) return;
+
+    return {
+      ...sample,
+      models: sample.models.map((model) => ({
+        ...model,
+        courses: model.courses.reduce((acc, match) => {
+          const course = courses.find(
+            (course) =>
+              course.subject === match.subject && course.number === match.number
+          );
+
+          if (course) return [...acc, course];
+
+          return acc;
+        }, [] as Course[]),
+      })),
+    };
+  }, [sample, courses]);
+
+  const [recentSearches] = useState([
     "Search 5 search 5 seerch",
     "Search 4 search 4 seerch",
     "Search 3 search 3 seerch",
@@ -10,13 +49,48 @@ function App() {
     "Search 1 search 1 seerch",
   ]);
 
-  // State to track the selected button
-  const [selectedButton, setSelectedButton] = useState(null);
+  const initialize = useCallback(async () => {
+    try {
+      const sample = await getSample();
+      setSample(sample);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
-  // Function to handle button click and set the selected button
-  const handleButtonClick = (button) => {
-    setSelectedButton(button);
+  useEffect(() => {
+    setLoading(true);
+
+    initialize();
+
+    setLoading(false);
+  }, [initialize]);
+
+  const handleClick = async (choice: Choice) => {
+    if (!sample) return;
+
+    setChoice(choice);
+    setLoading(true);
+
+    try {
+      await getOutcome(
+        sample.query,
+        sample.models[0].model,
+        sample.models[1].model,
+        choice
+      );
+
+      const _sample = await getSample();
+      setSample(_sample);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setLoading(false);
+    setChoice(null);
   };
+
+  if (!parsedSample) return;
 
   return (
     <div className={styles["app-container"]}>
@@ -36,190 +110,57 @@ function App() {
       {/* Main Content */}
       <div className={styles["main-content"]}>
         {/* Query Display */}
-        <div className={styles["query-display"]}>SAMPLE QUERY</div>
+        <div className={styles["query-display"]}>{parsedSample.query}</div>
 
         {/* Results */}
         <div className={styles["model-results"]}>
-          <div className={styles["model-column"]}>
-            <h3>Results from Model A</h3>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>
-                Structure and Interpretation of Computer Programs
-              </p>
-              <p>
-                An introduction to programming and computer science focused on
-                abstraction techniques as means to manage program complexity.
-                Techniques include procedural abstraction; control abstraction
-                using recursion, higher-order functions, generators, and
-                streams; data...
-              </p>
+          {parsedSample.models.map((result, index) => (
+            <div className={styles["model-column"]} key={result.model}>
+              <h3>Results from Model {index === 0 ? "A" : "B"}</h3>
+              {result.courses.map((course) => (
+                <div className={styles["course-result"]}>
+                  <p className={styles["course-number"]}>
+                    {course.subject} {course.number}
+                  </p>
+                  <p className={styles["course-title"]}>{course.title}</p>
+                  <p>{course.description}</p>
+                </div>
+              ))}
             </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61B</p>
-              <p className={styles["course-title"]}>Data Structures</p>
-              <p>
-                Fundamental dynamic data structures, including linear lists,
-                queues, trees, and other linked structures; arrays strings, and
-                hash tables. Storage management. Elementary principles of
-                software engineering. Abstract data types...
-              </p>
-            </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>
-                Structure and Interpretation of Computer Programs
-              </p>
-              <p>
-                An introduction to programming and computer science focused on
-                abstraction techniques as means to manage program complexity.
-                Techniques include procedural abstraction; control abstraction
-                using recursion, higher-order functions, generators, and
-                streams; data...
-              </p>
-            </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61B</p>
-              <p className={styles["course-title"]}>Data Structures</p>
-              <p>
-                Fundamental dynamic data structures, including linear lists,
-                queues, trees, and other linked structures; arrays strings, and
-                hash tables. Storage management. Elementary principles of
-                software engineering. Abstract data types...
-              </p>
-            </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>
-                Structure and Interpretation of Computer Programs
-              </p>
-              <p>
-                An introduction to programming and computer science focused on
-                abstraction techniques as means to manage program complexity.
-                Techniques include procedural abstraction; control abstraction
-                using recursion, higher-order functions, generators, and
-                streams; data...
-              </p>
-            </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61B</p>
-              <p className={styles["course-title"]}>Data Structures</p>
-              <p>
-                Fundamental dynamic data structures, including linear lists,
-                queues, trees, and other linked structures; arrays strings, and
-                hash tables. Storage management. Elementary principles of
-                software engineering. Abstract data types...
-              </p>
-            </div>
-            {/* Add more course results as needed */}
-          </div>
-
-          <div className={styles["model-column"]}>
-            <h3>Results from Model B</h3>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>
-                Structure and Interpretation of Computer Programs
-              </p>
-              <p>
-                An introduction to programming and computer science focused on
-                abstraction techniques as means to manage program complexity.
-                Techniques include procedural abstraction; control abstraction
-                using recursion, higher-order functions, generators, and
-                streams; data...
-              </p>
-            </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61B</p>
-              <p className={styles["course-title"]}>Data Structures</p>
-              <p>
-                Fundamental dynamic data structures, including linear lists,
-                queues, trees, and other linked structures; arrays strings, and
-                hash tables. Storage management. Elementary principles of
-                software engineering. Abstract data types...
-              </p>
-            </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>
-                Structure and Interpretation of Computer Programs
-              </p>
-              <p>
-                An introduction to programming and computer science focused on
-                abstraction techniques as means to manage program complexity.
-                Techniques include procedural abstraction; control abstraction
-                using recursion, higher-order functions, generators, and
-                streams; data...
-              </p>
-            </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61B</p>
-              <p className={styles["course-title"]}>Data Structures</p>
-              <p>
-                Fundamental dynamic data structures, including linear lists,
-                queues, trees, and other linked structures; arrays strings, and
-                hash tables. Storage management. Elementary principles of
-                software engineering. Abstract data types...
-              </p>
-            </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61A</p>
-              <p className={styles["course-title"]}>
-                Structure and Interpretation of Computer Programs
-              </p>
-              <p>
-                An introduction to programming and computer science focused on
-                abstraction techniques as means to manage program complexity.
-                Techniques include procedural abstraction; control abstraction
-                using recursion, higher-order functions, generators, and
-                streams; data...
-              </p>
-            </div>
-            <div className={styles["course-result"]}>
-              <p className={styles["course-number"]}>COMPSCI 61B</p>
-              <p className={styles["course-title"]}>Data Structures</p>
-              <p>
-                Fundamental dynamic data structures, including linear lists,
-                queues, trees, and other linked structures; arrays strings, and
-                hash tables. Storage management. Elementary principles of
-                software engineering. Abstract data types...
-              </p>
-            </div>
-            {/* Add more course results as needed */}
-          </div>
+          ))}
         </div>
 
         {/* Model comparison buttons */}
         <div className={styles["model-comparison"]}>
           <button
             className={`${styles["comparison-btn"]} ${
-              selectedButton === "modelA" ? styles["selected"] : ""
+              choice === 1 ? styles["selected"] : ""
             }`}
-            onClick={() => handleButtonClick("modelA")}
+            onClick={() => handleClick(1)}
           >
             👉 Model A is better
           </button>
           <button
             className={`${styles["comparison-btn"]} ${
-              selectedButton === "modelB" ? styles["selected"] : ""
+              choice === 2 ? styles["selected"] : ""
             }`}
-            onClick={() => handleButtonClick("modelB")}
+            onClick={() => handleClick(2)}
           >
             👉 Model B is better
           </button>
           <button
             className={`${styles["comparison-btn"]} ${
-              selectedButton === "tie" ? styles["selected"] : ""
+              choice === 0 ? styles["selected"] : ""
             }`}
-            onClick={() => handleButtonClick("tie")}
+            onClick={() => handleClick(0)}
           >
             🤝 Tie
           </button>
           <button
             className={`${styles["comparison-btn"]} ${
-              selectedButton === "bothBad" ? styles["selected"] : ""
+              choice === -1 ? styles["selected"] : ""
             }`}
-            onClick={() => handleButtonClick("bothBad")}
+            onClick={() => handleClick(-1)}
           >
             🛑 Both are bad
           </button>
