@@ -34,5 +34,23 @@
     "model1": "jacky_model",
     "model2": "glove",
     "choice": 2
+  },
+  {
+    "query": "business classes",
+    "model1": "jacky_model",
+    "model2": "baseline",
+    "choice": 2
+  },
+  {
+    "query": "computer science",
+    "model1": "raymond-model",
+    "model2": "baseline",
+    "choice": 2
+  },
+  {
+    "query": "us history",
+    "model1": "raymond-model",
+    "model2": "glove",
+    "choice": 1
   }
 ]

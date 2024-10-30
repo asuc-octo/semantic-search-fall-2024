@@ -52,8 +52,11 @@ def get_models():
 
 @app.route("/sample", methods=["GET"])
 def pick_models():
-    # Select a random query
-    query = random.choice(queries)
+    query = request.args.get("query", type=str)
+
+    # Select a random query if not provided
+    if query is None:
+        query = random.choice(queries)
 
     if not query:
         return jsonify("No queries available"), 400

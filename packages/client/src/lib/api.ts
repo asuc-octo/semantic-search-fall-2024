@@ -43,8 +43,11 @@ export const getOutcome = async (
   return (await response.json()) as Outcome[];
 };
 
-export const getSample = async () => {
-  const response = await fetch(`${API_BASE}/sample`);
+export const getSample = async (query?: string) => {
+  let url = `${API_BASE}/sample`;
+  if (query) url += `?query=${query}`;
+
+  const response = await fetch(url);
 
   return (await response.json()) as Sample;
 };
