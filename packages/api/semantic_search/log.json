@@ -1,0 +1,38 @@
+[
+  {
+    "query": "What are the best courses for learning Python?",
+    "model1": "glove",
+    "model2": "atharv-model",
+    "choice": 1
+  },
+  {
+    "query": "us history",
+    "model1": "atharv-model",
+    "model2": "glove",
+    "choice": 1
+  },
+  {
+    "query": "us history",
+    "model1": "subhash-model",
+    "model2": "glove",
+    "choice": 2
+  },
+  {
+    "query": "business classes",
+    "model1": "atharv-model",
+    "model2": "subhash-model",
+    "choice": 1
+  },
+  {
+    "query": "easy english classes",
+    "model1": "glove",
+    "model2": "atharv-model",
+    "choice": 2
+  },
+  {
+    "query": "business classes",
+    "model1": "jacky_model",
+    "model2": "glove",
+    "choice": 2
+  }
+]
