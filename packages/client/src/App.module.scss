@@ -170,3 +170,47 @@
   background-color: #2F80ED;
   color: white;
 }
+
+.custom-query-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.custom-query-input {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #d0d4dc;
+  border-radius: 24px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.custom-query-input:focus {
+  border-color: #4a90e2;
+}
+
+.submit-query-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #2f80ed;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.submit-query-btn:hover {
+  background-color: #1e5bbf;
+  transform: scale(1.05);
+}
+
+.submit-query-btn:active {
+  transform: scale(1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}

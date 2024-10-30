@@ -1,0 +1,11 @@
+
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"  # Maps port 8000 from container to host
+    volumes:
+      - .:/app  # Mounts your project files into the container for live updates

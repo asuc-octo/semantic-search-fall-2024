@@ -15,14 +15,14 @@ function App() {
   const [choice, setChoice] = useState<Choice | null>(null);
   const [sample, setSample] = useState<Sample | null>(null);
   const [, setLoading] = useState(true);
+  const [isCustomQuery, setIsCustomQuery] = useState(false); // Track if custom query mode is active
+  const [customQuery, setCustomQuery] = useState(""); // Store the custom query input
 
   const { data } = useQuery<CoursesResponse>(GET_COURSES);
-
   const courses = useMemo(() => data?.courseList, [data]);
 
   const parsedSample = useMemo(() => {
     if (!sample || !courses) return;
-
     return {
       ...sample,
       models: sample.results.map((result) => ({
@@ -32,22 +32,12 @@ function App() {
             (course) =>
               course.subject === match.subject && course.number === match.number
           );
-
           if (course) return [...acc, course];
-
           return acc;
         }, [] as Course[]),
       })),
     };
   }, [sample, courses]);
-
-  const [recentSearches] = useState([
-    "Search 5 search 5 seerch",
-    "Search 4 search 4 seerch",
-    "Search 3 search 3 seerch",
-    "Search 2 search 2 seerch",
-    "Search 1 search 1 seerch",
-  ]);
 
   const initialize = useCallback(async () => {
     try {
@@ -60,18 +50,14 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-
     initialize();
-
     setLoading(false);
   }, [initialize]);
 
   const handleClick = async (choice: Choice) => {
     if (!sample) return;
-
     setChoice(choice);
     setLoading(true);
-
     try {
       await getOutcome(
         sample.query,
@@ -79,32 +65,59 @@ function App() {
         sample.results[1].model,
         choice
       );
-
       const _sample = await getSample();
       setSample(_sample);
     } catch (error) {
       console.error(error);
     }
-
     setLoading(false);
     setChoice(null);
   };
 
-  if (!parsedSample) return;
+  const handleCustomQuerySubmit = async () => {
+    setLoading(true);
+    try {
+      const newSample = await getSample(customQuery); // Assume getSample can accept a query
+      setSample(newSample);
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+    setIsCustomQuery(false); // Reset to button after submission
+    setCustomQuery(""); // Clear the custom query
+  };
+
+  if (!parsedSample) return null;
 
   return (
     <div className={styles["app-container"]}>
       {/* Sidebar */}
       <div className={styles["sidebar"]}>
         <h2>Berkeleytime</h2>
-        <button className={styles["new-search-btn"]}>New Search</button>
-        <div className={styles["recent-searches"]}>
-          {recentSearches.map((search, index) => (
-            <div className={styles["search-item"]} key={index}>
-              {search}
-            </div>
-          ))}
-        </div>
+        {!isCustomQuery ? (
+          <button
+            className={styles["new-search-btn"]}
+            onClick={() => setIsCustomQuery(true)}
+          >
+            Enter Your Own Query
+          </button>
+        ) : (
+          <div className={styles["custom-query-container"]}>
+            <input
+              type="text"
+              className={styles["custom-query-input"]}
+              value={customQuery}
+              onChange={(e) => setCustomQuery(e.target.value)}
+              placeholder="Enter your query..."
+            />
+            <button
+              className={styles["submit-query-btn"]}
+              onClick={handleCustomQuerySubmit}
+            >
+              Submit
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Main Content */}
