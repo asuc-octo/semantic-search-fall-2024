@@ -82,5 +82,29 @@
     "model1": "glove",
     "model2": "baseline",
     "choice": 2
+  },
+  {
+    "query": "easy english classes",
+    "model1": "glove",
+    "model2": "jacky_model",
+    "choice": 2
+  },
+  {
+    "query": "us history",
+    "model1": "jacky_model",
+    "model2": "baseline",
+    "choice": 1
+  },
+  {
+    "query": "business classes",
+    "model1": "raymond-model",
+    "model2": "baseline",
+    "choice": 2
+  },
+  {
+    "query": "test",
+    "model1": "atharv-model",
+    "model2": "glove",
+    "choice": 2
   }
 ]

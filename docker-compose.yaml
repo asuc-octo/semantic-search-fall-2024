@@ -1,0 +1,38 @@
+services:
+  nginx:
+    build:
+      context: ./packages/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+      - client
+    networks:
+      - semantic-search
+    ports:
+      - 8080:8080
+
+  client:
+    build:
+      context: ./packages/client
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5173
+    networks:
+      - semantic-search
+    volumes:
+      - ./packages/client/src:/client/src
+
+  api:
+    build:
+      context: ./packages/api
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    networks:
+      - semantic-search
+    volumes:
+      - ./packages/api/semantic_search:/api/semantic_search
+      - ./packages/api/.env:/api/.env
+
+networks:
+  semantic-search:

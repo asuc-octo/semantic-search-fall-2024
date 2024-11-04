@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const API_BASE = "http://127.0.0.1:8000";
+export const API_BASE = "/api";
 export const GRAPHQL_BASE = "https://stanfurdtime.com/api/graphql";
 
 export interface Match {

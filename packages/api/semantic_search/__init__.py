@@ -45,12 +45,12 @@ def get_model_results(models, query, topK=5):
 
 
 # Routes
-@app.route("/models", methods=["GET"])
+@app.route("/api/models", methods=["GET"])
 def get_models():
     return jsonify(list(loaded_models.keys()))
 
 
-@app.route("/sample", methods=["GET"])
+@app.route("/api/sample", methods=["GET"])
 def pick_models():
     query = request.args.get("query", type=str)
 
@@ -83,7 +83,7 @@ outcomes = {
 }
 
 
-@app.route("/outcome", methods=["GET"])
+@app.route("/api/outcome", methods=["GET"])
 def compare_models():
     query = request.args.get("query", type=str)
     model1 = request.args.get("firstModel", type=str)
@@ -148,7 +148,7 @@ def compare_models():
     )
 
 
-@app.route("/courses", methods=["GET"])
+@app.route("/api/courses", methods=["GET"])
 def get_items():
     query = request.args.get("query", type=str)
     input_models = request.args.get("model", type=str)
@@ -175,8 +175,8 @@ def get_items():
 
 
 def dev():
-    app.run(port=8000, debug=True)
+    app.run(host="0.0.0.0", port=8000, debug=True)
 
 
 def prod():
-    serve(app, listen="*:8080")
+    serve(app, listen="*:8000")
