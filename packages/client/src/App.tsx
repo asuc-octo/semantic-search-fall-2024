@@ -38,7 +38,7 @@ function App() {
   const [query, setQuery] = useState("");
 
   const { data, loading } = useQuery<CoursesResponse>(GET_COURSES);
-  const courses = useMemo(() => data?.courseList, [data]);
+  const courses = useMemo(() => data?.courses, [data]);
 
   const parsedSample = useMemo(() => {
     if (!sample || !courses) return;

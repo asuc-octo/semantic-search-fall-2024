@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const API_BASE = "/api";
-export const GRAPHQL_BASE = "https://stanfurdtime.com/api/graphql";
+export const GRAPHQL_BASE = "https://staging.stanfurdtime.com/api/graphql";
 
 export interface Match {
   subject: string;
@@ -79,12 +79,12 @@ export interface Course {
 }
 
 export interface CoursesResponse {
-  courseList: Course[];
+  courses: Course[];
 }
 
 export const GET_COURSES = gql`
   query GetCourses {
-    courseList {
+    courses {
       subject
       number
       title
